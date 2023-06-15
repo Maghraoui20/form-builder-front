@@ -17,6 +17,8 @@ import TablePages from "./components/pages/TablePages";
 import TableForms from "./components/forms/TableForms";
 import PrivateRoute from "./components/PrivateRoutes/Privateroute";
 import PageFormSubmission from "./components/forms/FormSubmission";
+import TableUserSubmission from "./components/user/TableUserSubmission";
+import Menu from "./components/home/menu";
 
 function App() {
   let auth = JSON.parse(localStorage.getItem("profile"));
@@ -24,7 +26,9 @@ function App() {
   return (
     <div>
       <Router>
+      <Menu/>
         <Routes>
+       
 
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
@@ -33,10 +37,14 @@ function App() {
             {auth && auth.role === "admin" ? (
               <>
                 <Route path="/" element={<Home />} exact />
-                <Route path="/forms" element={<FormBuilder />} />
+                <Route path="/form" element={<FormBuilder />} />
                 <Route path="/pages" element={<Pages />} />
                 <Route path="/listPages" element={<TablePages />} />
                 <Route path="/listForms" element={<TableForms />} />
+                <Route path="/listSubmission" element={<TableUserSubmission />} />
+                 <Route path="/form/:id" element={<FormBuilder />} />
+                 <Route path="/pages/:id" element={<Pages />} />
+
               </>
             ) : (
               <Route path="/page/:id" element={<PageFormSubmission />} />

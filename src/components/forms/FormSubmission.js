@@ -1,4 +1,4 @@
-import { Container, Paper } from "@mui/material";
+import { Button, Container, Paper, TextField } from "@mui/material";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -69,16 +69,26 @@ const [Inputs,setInputs] = useState([]);
         }}
       >
         <form onSubmit={handleSubmit}>
-          <div className="container">
-            <div className="row">{Form.name}</div>
+          <div>
+            <div style={{ display: "flex", justifyContent:"center", fontSize:20, fontWeight:"bold" }}>{Form.name}</div>
+            <div style={{ display: "flex" }}>
 
-            <div className="row" >
+          
+
+            <div style={{ display: "flex" }}>
                 
                 {Inputs.map((input,key)=>(
-    <div className="col-25">
+    <div style={{ display: "flex" }}>
+      <div style={{ marginLeft: 10, marginTop: 20, fontSize: 20 }}>
+
     <label >{input.label}:</label>
+      </div>
     {input.type==="text" ||input.type==="tel" || input.type==="date" || input.type==="email"?  
-      <input type={input.type}  name={input.name} onChange={(e)=>handlChange(input.name, e, key)}  ></input>
+    <div style={{ margin: 10, width: 200 }}>
+
+      <TextField type={input.type}  name={input.name} onChange={(e)=>handlChange(input.name, e, key)}  ></TextField>
+    </div>
+
  :null }
 
 </div>
@@ -89,8 +99,13 @@ const [Inputs,setInputs] = useState([]);
 
 </div>
 
-            <div className="row">
-              <button className="button">submit Form</button>
+            </div>
+            <div   style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: 20,
+                }}>
+              <Button className="button" type="submit">submit Form</Button>
             </div>
           </div>
         </form>
