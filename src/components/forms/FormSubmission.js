@@ -8,16 +8,17 @@ function PageFormSubmission() {
   const [Form, setForm] = useState({});
   let auth = JSON.parse(localStorage.getItem("profile"));
 const [Inputs,setInputs] = useState([]);
-  const [submittedForm, setSubmittedForm] = useState({
-    user: auth._id,
-    form: "",
-    formSubmissions: [
-      {
-        nameInput: "",
-        valueInput: "",
-      },
-    ],
-  });
+const [submittedForm, setSubmittedForm] = useState({
+  user: auth._id,
+  page: "",
+  form: "",
+  formSubmissions: [
+    {
+      nameInput: "",
+      valueInput: "",
+    },
+  ],
+});
   useEffect(() => {
     async function fetchData() {
       try {
@@ -27,7 +28,8 @@ const [Inputs,setInputs] = useState([]);
         console.log(result.data.formName);
         setForm(result.data.formName);
         setInputs(result.data.formName.inputs)
-        setSubmittedForm({...submittedForm, form:result.data.formName._id})
+        setSubmittedForm({...submittedForm, page:params.id, form:result.data.formName._id})
+
       } catch (e) {
         console.log(e);
       }
