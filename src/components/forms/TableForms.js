@@ -2,6 +2,8 @@ import { Button } from "@mui/material";
 import  Axios  from "axios";
 import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import Menu from "../home/menu";
+import { toast } from "react-toastify";
 function TableForms() {
   const Navigate = useNavigate();
     const [Forms, setForms] = useState([]);
@@ -22,7 +24,8 @@ function TableForms() {
       console.log(id);
       try {
          await Axios.delete("http://localhost:5000/form/"+id);
-         window.location.reload();
+         toast("your form is deleted successfully")
+        // window.location.reload();
       } catch (e) {
         console.log(e);
       }
@@ -34,14 +37,15 @@ function TableForms() {
        Forms.length > 0 ?
 <div>
        <div  style={{
-        margin:30,
+        margin:100,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          fontWeight:"bold"
+          fontWeight:"bold",
+          fontSize:20,
+          
         }}>List of Forms</div>
                 <div style={{
-    margin:50,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

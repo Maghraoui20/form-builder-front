@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
 import {
@@ -22,29 +22,32 @@ import Menu from "./components/home/menu";
 
 function App() {
   let auth = JSON.parse(localStorage.getItem("profile"));
+  useEffect(() => {
+
+  }, [auth]);
 
   return (
     <div>
       <Router>
-      <Menu/>
+      {auth && <Menu/> }
         <Routes>
-       
-
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
 
           <Route element={<PrivateRoute />}>
-            {auth && auth.role === "admin" ? (
+            {auth && auth?.role === "admin" ? (
               <>
-                <Route path="/" element={<Home />} exact />
+              <Route path="/home" element={<Home />}  />
                 <Route path="/form" element={<FormBuilder />} />
                 <Route path="/pages" element={<Pages />} />
                 <Route path="/listPages" element={<TablePages />} />
                 <Route path="/listForms" element={<TableForms />} />
-                <Route path="/listSubmission" element={<TableUserSubmission />} />
-                 <Route path="/form/:id" element={<FormBuilder />} />
-                 <Route path="/pages/:id" element={<Pages />} />
-
+                <Route
+                  path="/listSubmission"
+                  element={<TableUserSubmission />}
+                />
+                <Route path="/form/:id" element={<FormBuilder />} />
+                <Route path="/pages/:id" element={<Pages />} />
               </>
             ) : (
               <Route path="/page/:id" element={<PageFormSubmission />} />

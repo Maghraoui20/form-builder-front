@@ -2,6 +2,7 @@ import { Button, Container, Paper, TextField } from "@mui/material";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function PageFormSubmission() {
   const params = useParams();
@@ -47,15 +48,14 @@ const [submittedForm, setSubmittedForm] = useState({
   };
   const handleSubmit =async (e) => {
     e.preventDefault();
-    console.log(submittedForm,"sub");
          try {
           
               const data = await Axios.post(
                 "http://localhost:5000/submissionform/createSubmitForm",
                 submittedForm
               );
-              console.log(data,"data");
-              return data;
+toast("Your form is submitted successfully ! Thank you !")
+return data;
 
           } catch (error) {
             console.log(error); }
@@ -66,13 +66,13 @@ const [submittedForm, setSubmittedForm] = useState({
         elevation={3}
         sx={{
           height: "maxWidth",
-          m: 5,
+          m: 15,
           p: 10,
         }}
       >
         <form onSubmit={handleSubmit}>
           <div>
-            <div style={{ display: "flex", justifyContent:"center", fontSize:20, fontWeight:"bold" }}>{Form.name}</div>
+            <div style={{ display: "flex", justifyContent:"center", fontSize:20, fontWeight:"bold", margin:40 }}>{Form.name}</div>
             <div style={{ display: "flex" }}>
 
           
@@ -86,7 +86,7 @@ const [submittedForm, setSubmittedForm] = useState({
     <label >{input.label}:</label>
       </div>
     {input.type==="text" ||input.type==="tel" || input.type==="date" || input.type==="email"?  
-    <div style={{ margin: 10, width: 200 }}>
+    <div style={{ margin: 10, }}>
 
       <TextField type={input.type}  name={input.name} onChange={(e)=>handlChange(input.name, e, key)}  ></TextField>
     </div>
@@ -110,12 +110,12 @@ const [submittedForm, setSubmittedForm] = useState({
               <Button className="button" type="submit">submit Form</Button>
             </div>
           </div>
-        </form>
+        </form> 
       </Paper>
     </Container>
   ) : (
     <div>
-      <h1>Loading...</h1>
+      <h1>No Data Found </h1>
     </div>
   );
 }

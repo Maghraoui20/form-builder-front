@@ -9,7 +9,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { DateRange } from "@mui/icons-material";
+import Menu from "../home/menu";
 function TableUserSubmission() {
   const [data, setData] = useState([]);
   const [pages, setPages] = useState([]);
@@ -19,7 +19,7 @@ function TableUserSubmission() {
   const [formId, setFormId] = useState("");
   const [pageId, setPageId] = useState("");
 
-  const handleChangeDate = async (name,e) => {
+  const handleChange = async (name,e) => {
     try {
       let uri = `http://localhost:5000/submissionform/getFilterDate?date=${date}&formId=${formId}&pageId=${pageId}`
       if(name==="Page")      {        setPageId(e.target.value === "all" ? "" : e.target.value)
@@ -69,11 +69,12 @@ function TableUserSubmission() {
     <div>
       <div
         style={{
-          margin: 30,
+          margin: 100,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           fontWeight: "bold",
+          fontSize:20
         }}
       >
         List of User's Submission
@@ -84,7 +85,7 @@ function TableUserSubmission() {
           minWidth: 120,
           display: "flex",
           justifyContent: "center",
-          margin: "10px 350px 10px 350px",
+          margin: "0 350px 10px 350px",
         }}
       >
         <FormControl fullWidth>
@@ -94,7 +95,7 @@ function TableUserSubmission() {
             id="demo-simple-select"
             onChange={(e) => {
               setPageId(e.target.value === "all" ? "" : e.target.value)
-              handleChangeDate('Page',e);
+              handleChange('Page',e);
             }}
           >
             <MenuItem value="all">All</MenuItem>
@@ -110,7 +111,7 @@ function TableUserSubmission() {
             id="demo-simple-select"
             onChange={(e) => {
               setFormId(e.target.value === "all" ? "" : e.target.value);
-              handleChangeDate('Form',e);
+              handleChange('Form',e);
             }}
           >
             <MenuItem value="all">All</MenuItem>
@@ -127,7 +128,7 @@ function TableUserSubmission() {
             id="demo-simple-select"
             onChange={(e) => {
               setDate(e.target.value);
-              handleChangeDate('Date',e);
+              handleChange('Date',e);
             }}
           ></TextField>
         </FormControl>
@@ -206,7 +207,7 @@ function TableUserSubmission() {
               );
             })
           ) : (
-            <div> No data found </div>
+            <div style={{display:"flex", justifyContent:"center",margin:100}}> <p>No data found</p> </div>
           )}
         </table>
       </div>

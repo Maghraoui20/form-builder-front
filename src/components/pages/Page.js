@@ -10,6 +10,8 @@ import {
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Menu from "../home/menu";
+import { toast } from "react-toastify";
 function Pages() {
   const [Forms, setForms] = useState([]);
   const [IdPage, setIdPage] = useState();
@@ -32,7 +34,7 @@ function Pages() {
           "http://localhost:5000/page/updatePage/"+params.id,
         Page
         );
-        console.log(data, "data");
+toast("Your page is updated ! ")
         return data;
       }
 
@@ -41,7 +43,7 @@ function Pages() {
         "http://localhost:5000/page/createPage",
         Page
       );
-      console.log(data, "data");
+toast("Your Page is submitted")
       return data;
     } catch (error) {
       console.log(error);

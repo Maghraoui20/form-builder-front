@@ -3,6 +3,8 @@ import { Button } from "@mui/material";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import Menu from "../home/menu";
+import { toast } from "react-toastify";
 function TablePages() {
   const [Pages, setPages] = useState([]);
   const Navigate = useNavigate();
@@ -36,18 +38,18 @@ function TablePages() {
     <div className="container">
       <div
         style={{
-          margin: 30,
+          margin: 100,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          fontSize:20,
           fontWeight: "bold",
         }}
       >
         List of Pages
-      </div>{" "}
+      </div>
       <div
         style={{
-          margin: 50,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -78,7 +80,7 @@ function TablePages() {
                   {" "}
                   <a href="#" onClick={() => {
                     navigator.clipboard.writeText(`http://localhost:3000/page/${page._id}`)
-                    alert('saved in your clipboard')
+                    toast('saved in your clipboard')
                     }}
 >
                     {" "}

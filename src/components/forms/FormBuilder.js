@@ -13,6 +13,8 @@ import Fields from "../pages/Page";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import Menu from "../home/menu";
+import { toast } from "react-toastify";
 
 function FormBuilder() {
   const params = useParams();
@@ -56,7 +58,7 @@ function FormBuilder() {
           "http://localhost:5000/form/updateForm/"+params.id,
           Form
         );
-        console.log(data, "data");
+        toast("Your form is updated successfully");
         return data;
       }
       else{
@@ -64,7 +66,8 @@ function FormBuilder() {
           "http://localhost:5000/form/createForm",
           Form
         );
-        console.log(data, "data");
+        toast("Your form is submitted successfully");
+
         return data;
       }
      
@@ -79,8 +82,9 @@ function FormBuilder() {
         elevation={3}
         sx={{
           height: "maxWidth",
-          m: 5,
-          p: 10,
+          m: 15,
+          p: 5,
+          width:"auto"
         }}
       >
         <form onSubmit={handleSubmit}>

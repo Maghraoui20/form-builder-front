@@ -46,7 +46,9 @@ const Navigate= useNavigate();
               );
               console.log(data,"data");
               localStorage.setItem('profile', JSON.stringify(data.data.user));
-              Navigate("/");
+              Navigate("/home");
+              toast("Sign in successfully ! Welcome ")
+              console.log('ici');
               return data;
 
           } catch (error) {
@@ -58,7 +60,13 @@ const Navigate= useNavigate();
       const handleClickShowPassword = () => setShowPassword((show) => !show);
   return (
     <Container component="main" maxWidth="lg">
-    <Grid container>
+    <Grid container  sx={{
+            my: 8,
+            mx: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}>
       <CssBaseline />
 
     
